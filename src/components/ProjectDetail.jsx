@@ -1,12 +1,10 @@
-// src/components/ProjectDetail.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { supabase } from "../supabase";
 import {
   ArrowLeft, ExternalLink, Github, Code2, Star,
   ChevronRight, Layers, Layout, Globe, Package, Cpu, Code,
 } from "lucide-react";
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 const TECH_ICONS = {
   React: Globe,
@@ -21,6 +19,7 @@ const TECH_ICONS = {
 
 const TechBadge = ({ tech }) => {
   const Icon = TECH_ICONS[tech] || TECH_ICONS["default"];
+  
   return (
     <div className="group relative overflow-hidden px-3 py-2 md:px-4 md:py-2.5 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-xl border border-blue-500/10 hover:border-blue-500/30 transition-all duration-300 cursor-default">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-purple-500/0 group-hover:from-blue-500/10 group-hover:to-purple-500/10 transition-all duration-500" />
@@ -34,40 +33,45 @@ const TechBadge = ({ tech }) => {
   );
 };
 
-const FeatureItem = ({ feature }) => (
-  <li className="group flex items-start space-x-3 p-2.5 md:p-3.5 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10">
-    <div className="relative mt-2">
-      <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
-      <div className="relative w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 group-hover:scale-125 transition-transform duration-300" />
-    </div>
-    <span className="text-sm md:text-base text-gray-300 group-hover:text-white transition-colors">
-      {feature}
-    </span>
-  </li>
-);
+const FeatureItem = ({ feature }) => {
+  return (
+    <li className="group flex items-start space-x-3 p-2.5 md:p-3.5 rounded-xl hover:bg-white/5 transition-all duration-300 border border-transparent hover:border-white/10">
+      <div className="relative mt-2">
+        <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-full blur group-hover:opacity-100 opacity-0 transition-opacity duration-300" />
+        <div className="relative w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 group-hover:scale-125 transition-transform duration-300" />
+      </div>
+      <span className="text-sm md:text-base text-gray-300 group-hover:text-white transition-colors">
+        {feature}
+      </span>
+    </li>
+  );
+};
 
 const ProjectStats = ({ project }) => {
   const techStackCount = project?.TechStack?.length || 0;
   const featuresCount = project?.Features?.length || 0;
+
   return (
     <div className="grid grid-cols-2 gap-3 md:gap-4 p-3 md:p-4 bg-[#0a0a1a] rounded-xl overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-purple-900/20 opacity-50 blur-2xl z-0" />
+
       <div className="relative z-10 flex items-center space-x-2 md:space-x-3 bg-white/5 p-2 md:p-3 rounded-lg border border-blue-500/20 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 hover:shadow-lg">
         <div className="bg-blue-500/20 p-1.5 md:p-2 rounded-full">
           <Code2 className="text-blue-300 w-4 h-4 md:w-6 md:h-6" strokeWidth={1.5} />
         </div>
         <div className="flex-grow">
           <div className="text-lg md:text-xl font-semibold text-blue-200">{techStackCount}</div>
-          <div className="text-[10px] md:text-xs text-gray-400">Total Teknologi</div>
+          <div className="text-[10px] md:text-xs text-gray-400">Total Technologies</div>
         </div>
       </div>
+
       <div className="relative z-10 flex items-center space-x-2 md:space-x-3 bg-white/5 p-2 md:p-3 rounded-lg border border-purple-500/20 transition-all duration-300 hover:scale-105 hover:border-purple-500/50 hover:shadow-lg">
         <div className="bg-purple-500/20 p-1.5 md:p-2 rounded-full">
           <Layers className="text-purple-300 w-4 h-4 md:w-6 md:h-6" strokeWidth={1.5} />
         </div>
         <div className="flex-grow">
           <div className="text-lg md:text-xl font-semibold text-purple-200">{featuresCount}</div>
-          <div className="text-[10px] md:text-xs text-gray-400">Fitur Utama</div>
+          <div className="text-[10px] md:text-xs text-gray-400">Key Features</div>
         </div>
       </div>
     </div>
@@ -75,80 +79,67 @@ const ProjectStats = ({ project }) => {
 };
 
 const handleGithubClick = (githubLink) => {
-  if (githubLink === "Private") {
+  if (githubLink === 'Private') {
     Swal.fire({
-      icon: "info",
-      title: "Source Code Private",
-      text: "Maaf, source code untuk proyek ini bersifat privat.",
-      confirmButtonText: "Mengerti",
-      confirmButtonColor: "#3085d6",
-      background: "#030014",
-      color: "#ffffff",
+      icon: 'info',
+      title: 'Source Code Private',
+      text: 'Maaf, source code untuk proyek ini bersifat privat.',
+      confirmButtonText: 'Mengerti',
+      confirmButtonColor: '#3085d6',
+      background: '#030014',
+      color: '#ffffff'
     });
     return false;
   }
   return true;
 };
 
-// Normalize any row (from DB or from localStorage cache) to the fields this page uses
-function normalizeProject(row) {
-  if (!row) return null;
-  return {
-    id: row.id,
-    Title: row.Title ?? row.title ?? "",
-    Description: row.Description ?? row.description ?? "",
-    Img: row.Img ?? row.img ?? "",
-    Link: row.Link ?? row.link ?? "",
-    Github: row.Github ?? row.github ?? "https://github.com/EkiZR",
-    TechStack: row.TechStack ?? row.techstack ?? [],
-    Features: row.Features ?? row.features ?? [],
-  };
-}
-
 const ProjectDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [project, setProject] = useState(null);
   const [isImageLoaded, setIsImageLoaded] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-
-    async function load() {
-      setError(null);
-
-      // 1) Try localStorage first (fast)
-      const cachedList = JSON.parse(localStorage.getItem("projects") || "[]");
-      const cachedMatch = cachedList.find((p) => Number(p.id) === Number(id));
-      if (cachedMatch) {
-        setProject(normalizeProject(cachedMatch));
+    const storedProjects = JSON.parse(localStorage.getItem("projects")) || [];
+    const selectedProject = storedProjects.find((p) => String(p.id) === id);
+    
+    if (selectedProject) {
+      // Parse Features and TechStack if they are JSON strings
+      let features = selectedProject.Features || [];
+      let techStack = selectedProject.TechStack || [];
+      
+      // If they are strings, try to parse them as JSON
+      if (typeof features === 'string') {
+        try {
+          features = JSON.parse(features);
+        } catch (e) {
+          console.error('Error parsing Features:', e);
+          features = [];
+        }
       }
-
-      // 2) Always fetch fresh from Supabase (uses lowercase DB columns)
-      const { data, error } = await supabase
-        .from("projects")
-        .select("id, title, description, img, link")
-        .eq("id", Number(id))
-        .single();
-
-      if (error) {
-        // If the table only has lowercase columns, this will succeed.
-        // If it still fails, show message but keep any cached project.
-        console.error("[ProjectDetail] Supabase error:", error.message);
-        setError(error.message);
-        return;
+      
+      if (typeof techStack === 'string') {
+        try {
+          techStack = JSON.parse(techStack);
+        } catch (e) {
+          console.error('Error parsing TechStack:', e);
+          techStack = [];
+        }
       }
-
-      const fresh = normalizeProject(data);
-      if (fresh) setProject(fresh);
+      
+      const enhancedProject = {
+        ...selectedProject,
+        Features: features,
+        TechStack: techStack,
+        Github: selectedProject.Github || 'https://github.com/EkiZR',
+      };
+      setProject(enhancedProject);
     }
-
-    load();
   }, [id]);
 
-  if (!project && !error) {
+  if (!project) {
     return (
       <div className="min-h-screen bg-[#030014] flex items-center justify-center">
         <div className="text-center space-y-6 animate-fadeIn">
@@ -159,27 +150,9 @@ const ProjectDetails = () => {
     );
   }
 
-  if (error && !project) {
-    return (
-      <div className="min-h-screen bg-[#030014] flex items-center justify-center">
-        <div className="text-center space-y-4">
-          <h2 className="text-xl md:text-2xl font-semibold text-red-400">Error</h2>
-          <p className="text-white/80">{error}</p>
-          <button
-            onClick={() => navigate(-1)}
-            className="mt-4 px-4 py-2 rounded-lg bg-white/10 text-white hover:bg-white/20 border border-white/10"
-          >
-            Go back
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // project is guaranteed here
   return (
     <div className="min-h-screen bg-[#030014] px-[2%] sm:px-0 relative overflow-hidden">
-      {/* Background animations */}
+      {/* Background animations remain unchanged */}
       <div className="fixed inset-0">
         <div className="absolute -inset-[10px] opacity-20">
           <div className="absolute top-0 -left-4 w-72 md:w-96 h-72 md:h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob" />
@@ -227,6 +200,7 @@ const ProjectDetails = () => {
               <ProjectStats project={project} />
 
               <div className="flex flex-wrap gap-3 md:gap-4">
+                {/* Action buttons */}
                 <a
                   href={project.Link}
                   target="_blank"
@@ -270,16 +244,18 @@ const ProjectDetails = () => {
 
             <div className="space-y-6 md:space-y-10 animate-slideInRight">
               <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
+              
                 <div className="absolute inset-0 bg-gradient-to-t from-[#030014] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img
                   src={project.Img}
                   alt={project.Title}
-                  className="w-full object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
+                  className="w-full  object-cover transform transition-transform duration-700 will-change-transform group-hover:scale-105"
                   onLoad={() => setIsImageLoaded(true)}
                 />
                 <div className="absolute inset-0 border-2 border-white/0 group-hover:border-white/10 transition-colors duration-300 rounded-2xl" />
               </div>
 
+              {/* Fitur Utama */}
               <div className="bg-white/[0.02] backdrop-blur-xl rounded-2xl p-8 border border-white/10 space-y-6 hover:border-white/20 transition-colors duration-300 group">
                 <h3 className="text-xl font-semibold text-white/90 flex items-center gap-3">
                   <Star className="w-5 h-5 text-yellow-400 group-hover:rotate-[20deg] transition-transform duration-300" />
@@ -300,30 +276,66 @@ const ProjectDetails = () => {
         </div>
       </div>
 
-      {/* NOTE: plain <style> (not <style jsx>) to avoid console warnings */}
-      <style>{`
+      <style jsx>{`
         @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
+          0% {
+            transform: translate(0px, 0px) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+          100% {
+            transform: translate(0px, 0px) scale(1);
+          }
         }
-        .animate-blob { animation: blob 10s infinite; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-        .animate-fadeIn { animation: fadeIn 0.7s ease-out; }
-        .animate-slideInLeft { animation: slideInLeft 0.7s ease-out; }
-        .animate-slideInRight { animation: slideInRight 0.7s ease-out; }
+        .animate-blob {
+          animation: blob 10s infinite;
+        }
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+        .animation-delay-4000 {
+          animation-delay: 4s;
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.7s ease-out;
+        }
+        .animate-slideInLeft {
+          animation: slideInLeft 0.7s ease-out;
+        }
+        .animate-slideInRight {
+          animation: slideInRight 0.7s ease-out;
+        }
         @keyframes fadeIn {
-          from { opacity: 0; } to { opacity: 1; }
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
         @keyframes slideInLeft {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
+          from {
+            opacity: 0;
+            transform: translateX(-30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
         @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(30px); }
-          to { opacity: 1; transform: translateX(0); }
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
       `}</style>
     </div>
