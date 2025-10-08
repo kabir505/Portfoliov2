@@ -133,6 +133,20 @@ export default function FullWidthTabs() {
 
   const fetchData = useCallback(async () => {
     try {
+      // Debug: Log environment variables
+      console.log("🔍 Debug - VITE_SUPABASE_URL:", import.meta.env.VITE_SUPABASE_URL);
+      console.log("🔍 Debug - VITE_SUPABASE_ANON_KEY:", import.meta.env.VITE_SUPABASE_ANON_KEY ? "Present" : "Missing");
+      
+      // Check if Supabase is configured
+      if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
+        console.log("❌ Supabase not configured, using empty data");
+        setProjects([]);
+        setWorkExperience([]);
+        return;
+      }
+      
+      console.log("✅ Supabase configured, fetching data...");
+
       // Mengambil data dari Supabase secara paralel
       const [projectsResponse, workExperienceResponse] = await Promise.all([
         supabase.from("projects").select("*").order('id', { ascending: true }),
@@ -218,6 +232,36 @@ export default function FullWidthTabs() {
     if (cachedProjects && cachedWorkExperience) {
         setProjects(JSON.parse(cachedProjects));
         setWorkExperience(JSON.parse(cachedWorkExperience));
+    } else {
+        // Add sample data if no cached data exists
+        const sampleProjects = [
+          {
+            id: 1,
+            Title: "Portfolio Website",
+            Description: "Modern responsive portfolio built with React, showcasing projects and skills with beautiful animations.",
+            Img: "/kabirsuriphoto.jpg",
+            Link: "https://codingkabs.vercel.app",
+            Github: "https://github.com/kabir505/Portfoliov2",
+            Features: ["Responsive Design", "Modern UI/UX", "Smooth Animations", "Dark Theme"],
+            TechStack: ["React", "Tailwind CSS", "Vite", "AOS"]
+          }
+        ];
+        
+        const sampleWorkExperience = [
+          {
+            id: 1,
+            Company: "TP ICAP",
+            Position: "Software Engineering Intern",
+            Location: "London, UK",
+            Duration: "Summer 2023",
+            Description: "Worked on automation tools and scalable cloud systems, collaborating with cross-functional teams to deliver high-impact solutions.",
+            Img: "/kabirsuriphoto.jpg",
+            Achievements: ["Developed automation tools that reduced manual processes by 40%", "Collaborated on cloud infrastructure scaling", "Participated in agile development practices"]
+          }
+        ];
+        
+        setProjects(sampleProjects);
+        setWorkExperience(sampleWorkExperience);
     }
     
     fetchData(); // Tetap panggil fetchData untuk sinkronisasi data terbaru
