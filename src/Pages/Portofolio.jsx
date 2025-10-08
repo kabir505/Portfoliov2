@@ -15,8 +15,8 @@ import CardProject from "../components/CardProject";
 import TechStackIcon from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Certificate from "../components/Certificate";
-import { Code, Award, Boxes } from "lucide-react";
+import WorkExperience from "../components/WorkExperience";
+import { Code, Briefcase, Boxes } from "lucide-react";
 
 
 const ToggleButton = ({ onClick, isShowingMore }) => (
@@ -123,9 +123,9 @@ export default function FullWidthTabs() {
   const theme = useTheme();
   const [value, setValue] = useState(0);
   const [projects, setProjects] = useState([]);
-  const [certificates, setCertificates] = useState([]);
+  const [workExperience, setWorkExperience] = useState([]);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllCertificates, setShowAllCertificates] = useState(false);
+  const [showAllWorkExperience, setShowAllWorkExperience] = useState(false);
   const isMobile = window.innerWidth < 768;
   const initialItems = isMobile ? 4 : 6;
 
@@ -139,18 +139,18 @@ export default function FullWidthTabs() {
   const fetchData = useCallback(async () => {
     try {
       // Mengambil data dari Supabase secara paralel
-      const [projectsResponse, certificatesResponse] = await Promise.all([
+      const [projectsResponse, workExperienceResponse] = await Promise.all([
         supabase.from("projects").select("*").order('id', { ascending: true }),
-        supabase.from("certificates").select("*").order('id', { ascending: true }), 
+        supabase.from("work_experience").select("*").order('id', { ascending: true }), 
       ]);
 
       // Error handling untuk setiap request
       if (projectsResponse.error) throw projectsResponse.error;
-      if (certificatesResponse.error) throw certificatesResponse.error;
+      if (workExperienceResponse.error) throw workExperienceResponse.error;
 
       // Supabase mengembalikan data dalam properti 'data'
       const rawProjectData = projectsResponse.data || [];
-      const certificateData = certificatesResponse.data || [];
+      const rawWorkExperienceData = workExperienceResponse.data || [];
 
       // Parse Features and TechStack if they are JSON strings
       const projectData = rawProjectData.map(project => {
@@ -183,12 +183,42 @@ export default function FullWidthTabs() {
         };
       });
 
+      // Parse TechStack and Achievements for work experience
+      const workExperienceData = rawWorkExperienceData.map(work => {
+        let techStack = work.TechStack || [];
+        let achievements = work.Achievements || [];
+        
+        if (typeof techStack === 'string') {
+          try {
+            techStack = JSON.parse(techStack);
+          } catch (e) {
+            console.error('Error parsing TechStack for work:', work.Company, e);
+            techStack = [];
+          }
+        }
+        
+        if (typeof achievements === 'string') {
+          try {
+            achievements = JSON.parse(achievements);
+          } catch (e) {
+            console.error('Error parsing Achievements for work:', work.Company, e);
+            achievements = [];
+          }
+        }
+        
+        return {
+          ...work,
+          TechStack: techStack,
+          Achievements: achievements
+        };
+      });
+
       setProjects(projectData);
-      setCertificates(certificateData);
+      setWorkExperience(workExperienceData);
 
       // Store in localStorage (fungsionalitas ini tetap dipertahankan)
       localStorage.setItem("projects", JSON.stringify(projectData));
-      localStorage.setItem("certificates", JSON.stringify(certificateData));
+      localStorage.setItem("work_experience", JSON.stringify(workExperienceData));
     } catch (error) {
       console.error("Error fetching data from Supabase:", error.message);
     }
@@ -199,11 +229,11 @@ export default function FullWidthTabs() {
   useEffect(() => {
     // Coba ambil dari localStorage dulu untuk laod lebih cepat
     const cachedProjects = localStorage.getItem('projects');
-    const cachedCertificates = localStorage.getItem('certificates');
+    const cachedWorkExperience = localStorage.getItem('work_experience');
 
-    if (cachedProjects && cachedCertificates) {
+    if (cachedProjects && cachedWorkExperience) {
         setProjects(JSON.parse(cachedProjects));
-        setCertificates(JSON.parse(cachedCertificates));
+        setWorkExperience(JSON.parse(cachedWorkExperience));
     }
     
     fetchData(); // Tetap panggil fetchData untuk sinkronisasi data terbaru
@@ -217,12 +247,12 @@ export default function FullWidthTabs() {
     if (type === 'projects') {
       setShowAllProjects(prev => !prev);
     } else {
-      setShowAllCertificates(prev => !prev);
+      setShowAllWorkExperience(prev => !prev);
     }
   }, []);
 
   const displayedProjects = showAllProjects ? projects : projects.slice(0, initialItems);
-  const displayedCertificates = showAllCertificates ? certificates : certificates.slice(0, initialItems);
+  const displayedWorkExperience = showAllWorkExperience ? workExperience : workExperience.slice(0, initialItems);
 
   // Sisa dari komponen (return statement) tidak ada perubahan
   return (
@@ -321,8 +351,8 @@ export default function FullWidthTabs() {
               {...a11yProps(0)}
             />
             <Tab
-              icon={<Award className="mb-2 w-5 h-5 transition-all duration-300" />}
-              label="Certificates"
+              icon={<Briefcase className="mb-2 w-5 h-5 transition-all duration-300" />}
+              label="Work Experience"
               {...a11yProps(1)}
             />
             <Tab
@@ -370,23 +400,31 @@ export default function FullWidthTabs() {
 
           <TabPanel value={value} index={1} dir={theme.direction}>
             <div className="container mx-auto flex justify-center items-center overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-3 md:gap-5 gap-4">
-                {displayedCertificates.map((certificate, index) => (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 2xl:grid-cols-3 gap-5">
+                {displayedWorkExperience.map((work, index) => (
                   <div
-                    key={certificate.id || index}
+                    key={work.id || index}
                     data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
                     data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
                   >
-                    <Certificate ImgSertif={certificate.Img} />
+                    <WorkExperience
+                      Img={work.Img}
+                      Company={work.Company}
+                      Position={work.Position}
+                      Location={work.Location}
+                      Duration={work.Duration}
+                      Description={work.Description}
+                      id={work.id}
+                    />
                   </div>
                 ))}
               </div>
             </div>
-            {certificates.length > initialItems && (
+            {workExperience.length > initialItems && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
-                  onClick={() => toggleShowMore('certificates')}
-                  isShowingMore={showAllCertificates}
+                  onClick={() => toggleShowMore('work_experience')}
+                  isShowingMore={showAllWorkExperience}
                 />
               </div>
             )}
