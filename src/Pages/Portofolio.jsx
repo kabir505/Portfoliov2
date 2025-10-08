@@ -183,19 +183,9 @@ export default function FullWidthTabs() {
         };
       });
 
-      // Parse TechStack and Achievements for work experience
+      // Parse Achievements for work experience
       const workExperienceData = rawWorkExperienceData.map(work => {
-        let techStack = work.TechStack || [];
         let achievements = work.Achievements || [];
-        
-        if (typeof techStack === 'string') {
-          try {
-            techStack = JSON.parse(techStack);
-          } catch (e) {
-            console.error('Error parsing TechStack for work:', work.Company, e);
-            techStack = [];
-          }
-        }
         
         if (typeof achievements === 'string') {
           try {
@@ -208,7 +198,6 @@ export default function FullWidthTabs() {
         
         return {
           ...work,
-          TechStack: techStack,
           Achievements: achievements
         };
       });

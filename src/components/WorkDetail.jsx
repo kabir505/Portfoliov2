@@ -5,19 +5,6 @@ import {
   ChevronRight, Briefcase, Clock, Star, CheckCircle
 } from "lucide-react";
 
-const TechBadge = ({ tech }) => {
-  return (
-    <div className="group relative overflow-hidden px-3 py-2 md:px-4 md:py-2.5 bg-gradient-to-r from-blue-600/10 to-cyan-600/10 rounded-xl border border-blue-500/10 hover:border-blue-500/30 transition-all duration-300 cursor-default">
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/10 group-hover:to-cyan-500/10 transition-all duration-500" />
-      <div className="relative flex items-center gap-1.5 md:gap-2">
-        <Briefcase className="w-3.5 h-3.5 md:w-4 md:h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
-        <span className="text-xs md:text-sm font-medium text-blue-300/90 group-hover:text-blue-200 transition-colors">
-          {tech}
-        </span>
-      </div>
-    </div>
-  );
-};
 
 const AchievementItem = ({ achievement }) => {
   return (
@@ -34,22 +21,11 @@ const AchievementItem = ({ achievement }) => {
 };
 
 const WorkStats = ({ work }) => {
-  const techStackCount = work?.TechStack?.length || 0;
   const achievementsCount = work?.Achievements?.length || 0;
 
   return (
-    <div className="grid grid-cols-2 gap-3 md:gap-4 p-3 md:p-4 bg-[#0a0a1a] rounded-xl overflow-hidden relative">
+    <div className="grid grid-cols-1 gap-3 md:gap-4 p-3 md:p-4 bg-[#0a0a1a] rounded-xl overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-cyan-900/20 opacity-50 blur-2xl z-0" />
-
-      <div className="relative z-10 flex items-center space-x-2 md:space-x-3 bg-white/5 p-2 md:p-3 rounded-lg border border-blue-500/20 transition-all duration-300 hover:scale-105 hover:border-blue-500/50 hover:shadow-lg">
-        <div className="bg-blue-500/20 p-1.5 md:p-2 rounded-full">
-          <Briefcase className="text-blue-300 w-4 h-4 md:w-6 md:h-6" strokeWidth={1.5} />
-        </div>
-        <div className="flex-grow">
-          <div className="text-lg md:text-xl font-semibold text-blue-200">{techStackCount}</div>
-          <div className="text-[10px] md:text-xs text-gray-400">Technologies</div>
-        </div>
-      </div>
 
       <div className="relative z-10 flex items-center space-x-2 md:space-x-3 bg-white/5 p-2 md:p-3 rounded-lg border border-green-500/20 transition-all duration-300 hover:scale-105 hover:border-green-500/50 hover:shadow-lg">
         <div className="bg-green-500/20 p-1.5 md:p-2 rounded-full">
@@ -186,21 +162,6 @@ const WorkDetails = () => {
 
               <WorkStats work={work} />
 
-              <div className="space-y-4 md:space-y-6">
-                <h3 className="text-lg md:text-xl font-semibold text-white/90 flex items-center gap-2 md:gap-3">
-                  <Briefcase className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
-                  Technologies Used
-                </h3>
-                {work.TechStack.length > 0 ? (
-                  <div className="flex flex-wrap gap-2 md:gap-3">
-                    {work.TechStack.map((tech, index) => (
-                      <TechBadge key={index} tech={tech} />
-                    ))}
-                  </div>
-                ) : (
-                  <p className="text-sm md:text-base text-gray-400 opacity-50">No technologies added.</p>
-                )}
-              </div>
             </div>
 
             <div className="space-y-6 md:space-y-10 animate-slideInRight">

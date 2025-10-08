@@ -42,7 +42,7 @@ const ProfileImage = memo(() => (
       </div>
 
       <div className="relative">
-        <div className="w-72 h-72 sm:w-80 sm:h-80 rounded-full overflow-hidden shadow-[0_0_40px_rgba(120,119,198,0.3)] transform transition-all duration-700 group-hover:scale-105">
+        <div className="w-80 h-80 sm:w-96 sm:h-96 rounded-full overflow-hidden shadow-[0_0_40px_rgba(120,119,198,0.3)] transform transition-all duration-700 group-hover:scale-105">
           <div className="absolute inset-0 border-4 border-white/20 rounded-full z-20 transition-all duration-700 group-hover:border-white/40 group-hover:scale-105" />
           
           {/* Optimized overlay effects - disabled on mobile */}
@@ -114,18 +114,18 @@ const StatCard = memo(({ icon: Icon, color, value, label, description, animation
 
 const AboutPage = () => {
   // Memoized calculations
-  const { totalProjects, totalCertificates, YearExperience } = useMemo(() => {
+  const { totalProjects, totalWorkExperience, YearExperience } = useMemo(() => {
     const storedProjects = JSON.parse(localStorage.getItem("projects") || "[]");
-    const storedCertificates = JSON.parse(localStorage.getItem("certificates") || "[]");
+    const storedWorkExperience = JSON.parse(localStorage.getItem("work_experience") || "[]");
     
-    const startDate = new Date("");
+    const startDate = new Date("2023-01-01"); // Set your actual start date
     const today = new Date();
     const experience = today.getFullYear() - startDate.getFullYear() -
       (today < new Date(today.getFullYear(), startDate.getMonth(), startDate.getDate()) ? 1 : 0);
 
     return {
       totalProjects: storedProjects.length,
-      totalCertificates: storedCertificates.length,
+      totalWorkExperience: storedWorkExperience.length,
       YearExperience: experience
     };
   }, []);
@@ -167,9 +167,9 @@ const AboutPage = () => {
     {
       icon: Award,
       color: "from-[#a855f7] to-[#6366f1]",
-      value: totalCertificates,
-      label: "Certificates",
-      description: "Professional skills validated",
+      value: totalWorkExperience,
+      label: "Work Experience",
+      description: "Professional work positions",
       animation: "fade-up",
     },
     {
@@ -180,7 +180,7 @@ const AboutPage = () => {
       description: "Continuous learning journey",
       animation: "fade-left",
     },
-  ], [totalProjects, totalCertificates, YearExperience]);
+  ], [totalProjects, totalWorkExperience, YearExperience]);
 
   return (
     <div
@@ -214,7 +214,7 @@ const AboutPage = () => {
               data-aos="fade-right"
               data-aos-duration="1500"
             >
-            I’m a Computer Science Graduate at King’s College London passionate about building software that’s efficient, impactful, and sustainable. My experience spans frontend and backend development, with hands-on roles at TP ICAP and Condé Nast, where I worked on automation tools, scalable cloud systems, and creative tech solutions.
+            I’m a Computer Science student at King’s College London passionate about building software that’s efficient, impactful, and sustainable. My experience spans frontend and backend development, with hands-on roles at TP ICAP and Condé Nast, where I worked on automation tools, scalable cloud systems, and creative tech solutions.
 
             Alongside my degree, I founded CodingKabs - a digital platform where I share insights on software engineering, productivity, and tech lifestyle content to over 200,000 followers. My goal is to bridge the gap between creativity and technology while driving innovation that balances performance and sustainability.
             </p>
@@ -242,7 +242,7 @@ const AboutPage = () => {
       </div>
 
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-4 lg:gap-4 lg:px-0 w-full">
-              <a href="https://drive.google.com/file/d/1hqsAdC4el357VvMNT4J5zpb4VyFTgVwb/view?usp=sharing" className="w-full lg:w-auto">
+              <a href="https://drive.google.com/file/d/1hqsAdC4el357VvMNT4J5zpb4VyFTgVwb/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="w-full lg:w-auto">
               <button 
                 data-aos="fade-up"
                 data-aos-duration="800"
