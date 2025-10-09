@@ -1,20 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ExternalLink, ArrowRight, Github } from 'lucide-react';
 
-const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
+const CardProject = ({ Img, Title, Description, Link: ProjectLink, Github: GithubLink, id }) => {
   // Handle kasus ketika ProjectLink kosong
   const handleLiveDemo = (e) => {
     if (!ProjectLink) {
-      console.log("ProjectLink kosong");
       e.preventDefault();
-      alert("Live demo link is not available");
+      return false;
     }
+    return true;
+  };
+  
+  const handleGithub = (e) => {
+    if (!GithubLink) {
+      e.preventDefault();
+      return false;
+    }
+    return true;
   };
   
   const handleDetails = (e) => {
     if (!id) {
-      console.log("ID kosong");
       e.preventDefault();
       alert("Project details are not available");
     }
@@ -45,35 +52,50 @@ const CardProject = ({ Img, Title, Description, Link: ProjectLink, id }) => {
               {Description}
             </p>
             
-            <div className="pt-4 flex items-center justify-between mt-auto">
-              {ProjectLink ? (
-                <a
-                href={ProjectLink || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={handleLiveDemo}
-                  className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200"
-                >
-                  <span className="text-sm font-medium">Live Demo</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              ) : (
-                <span className="text-gray-500 text-sm">Demo Not Available</span>
-              )}
+            <div className="pt-4 flex flex-col space-y-3 mt-auto">
+              <div className="flex items-center justify-between">
+                {ProjectLink ? (
+                  <a
+                    href={ProjectLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleLiveDemo}
+                    className="inline-flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                  >
+                    <span className="text-sm font-medium">Live Demo</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+                ) : (
+                  <span className="text-gray-500 text-sm">Live Demo N/A</span>
+                )}
+                
+                {GithubLink ? (
+                  <a
+                    href={GithubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleGithub}
+                    className="inline-flex items-center space-x-2 text-purple-400 hover:text-purple-300 transition-colors duration-200"
+                  >
+                    <span className="text-sm font-medium">GitHub</span>
+                    <Github className="w-4 h-4" />
+                  </a>
+                ) : (
+                  <span className="text-gray-500 text-sm">GitHub N/A</span>
+                )}
+              </div>
               
-     
-
               {id ? (
                 <Link
                   to={`/project/${id}`}
                   onClick={handleDetails}
-                  className="inline-flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/90 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                  className="inline-flex items-center justify-center space-x-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/90 transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                 >
                   <span className="text-sm font-medium">Details</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               ) : (
-                <span className="text-gray-500 text-sm">Details Not Available</span>
+                <span className="text-gray-500 text-sm text-center">Details Not Available</span>
               )}
             </div>
           </div>

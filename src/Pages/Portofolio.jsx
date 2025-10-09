@@ -122,7 +122,8 @@ export default function FullWidthTabs() {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllWorkExperience, setShowAllWorkExperience] = useState(false);
   const isMobile = window.innerWidth < 768;
-  const initialItems = isMobile ? 4 : 6;
+  const initialProjects = 8; // Always show 8 projects
+  const initialWorkExperience = 4; // Always show 4 work experiences
 
   useEffect(() => {
     AOS.init({
@@ -279,8 +280,8 @@ export default function FullWidthTabs() {
     }
   }, []);
 
-  const displayedProjects = showAllProjects ? projects : projects.slice(0, initialItems);
-  const displayedWorkExperience = showAllWorkExperience ? workExperience : workExperience.slice(0, initialItems);
+  const displayedProjects = showAllProjects ? projects : projects.slice(0, initialProjects);
+  const displayedWorkExperience = showAllWorkExperience ? workExperience : workExperience.slice(0, initialWorkExperience);
 
   // Sisa dari komponen (return statement) tidak ada perubahan
   return (
@@ -407,13 +408,14 @@ export default function FullWidthTabs() {
                       Title={project.Title}
                       Description={project.Description}
                       Link={project.Link}
+                      Github={project.Github}
                       id={project.id}
                     />
                   </div>
                 ))}
               </div>
             </div>
-            {projects.length > initialItems && (
+            {projects.length > initialProjects && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
                   onClick={() => toggleShowMore('projects')}
@@ -447,7 +449,7 @@ export default function FullWidthTabs() {
                 ))}
               </div>
             </div>
-            {workExperience.length > initialItems && (
+            {workExperience.length > initialWorkExperience && (
               <div className="mt-6 w-full flex justify-start">
                 <ToggleButton
                   onClick={() => toggleShowMore('work_experience')}
