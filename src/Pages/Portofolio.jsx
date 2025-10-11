@@ -10,7 +10,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardProject from "../components/CardProject";
-import TechStackIcon from "../components/TechStackIcon";
+import TechStackItem from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import WorkExperience from "../components/WorkExperience";
@@ -99,33 +99,7 @@ function a11yProps(index) {
   };
 }
 
-// techStacks tetap sama
-const techStacks = [
-  { icon: "html.svg", language: "HTML" },
-  { icon: "css.svg", language: "CSS" },
-  { icon: "javascript.svg", language: "JavaScript" },
-  { icon: "tailwind.svg", language: "Tailwind CSS" },
-  { icon: "reactjs.svg", language: "ReactJS" },
-  { icon: "vite.svg", language: "Vite" },
-  { icon: "nodejs.svg", language: "Node JS" },
-  { icon: "bootstrap.svg", language: "Bootstrap" },
-  { icon: "firebase.svg", language: "Firebase" },
-  { icon: "MUI.svg", language: "Material UI" },
-  { icon: "vercel.svg", language: "Vercel" },
-  { icon: "SweetAlert.svg", language: "SweetAlert2" },
-];
-
-// export default function FullWidthTabs() {
-//   const [value, setValue] = useState(0);
-//   const [projects, setProjects] = useState([]);
-//   const [workExperience, setWorkExperience] = useState([]);
-//   const [showAllProjects, setShowAllProjects] = useState(false);
-//   const [showAllWorkExperience, setShowAllWorkExperience] = useState(false);
-//   const isMobile = window.innerWidth < 768;
-//   const initialProjects = 8; // Always show 8 projects
-//   const initialWorkExperience = 4; // Always show 4 work experiences
-
-
+// Tech stack data organized by categories
 const techStackData = {
   languages: [
     "Python", "Java", "C++", "Scala", "HTML/CSS", "JavaScript", "MATLAB", "SQL"
@@ -136,6 +110,16 @@ const techStackData = {
     "AWS", "Docker", "ROS", "JIRA", "Trello", "Unit Testing (PyTest, JUnit)"
   ]
 };
+
+export default function FullWidthTabs() {
+  const [value, setValue] = useState(0);
+  const [projects, setProjects] = useState([]);
+  const [workExperience, setWorkExperience] = useState([]);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllWorkExperience, setShowAllWorkExperience] = useState(false);
+  const isMobile = window.innerWidth < 768;
+  const initialProjects = 8; // Always show 8 projects
+  const initialWorkExperience = 4; // Always show 4 work experiences
 
   useEffect(() => {
     AOS.init({
@@ -474,17 +458,41 @@ const techStackData = {
 
           {value === 2 && (
             <TabPanel value={value} index={2}>
-            <div className="container mx-auto flex justify-center items-center overflow-hidden pb-[5%]">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 lg:gap-8 gap-5">
-                {techStacks.map((stack, index) => (
-                  <div
-                    key={index}
-                    data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
-                    data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
-                  >
-                    <TechStackIcon TechStackIcon={stack.icon} Language={stack.language} />
-                  </div>
-                ))}
+            <div className="container mx-auto overflow-hidden pb-[5%]">
+              {/* Languages Section */}
+              <div className="mb-12" data-aos="fade-up" data-aos-duration="1000">
+                <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7] mb-6 text-center">
+                  Languages
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4">
+                  {techStackData.languages.map((language, index) => (
+                    <div
+                      key={index}
+                      data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                      data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
+                    >
+                      <TechStackItem name={language} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Technologies/Frameworks Section */}
+              <div data-aos="fade-up" data-aos-duration="1200">
+                <h3 className="text-2xl md:text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7] mb-6 text-center">
+                  Technologies/Frameworks
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                  {techStackData.technologies.map((tech, index) => (
+                    <div
+                      key={index}
+                      data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
+                      data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
+                    >
+                      <TechStackItem name={tech} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </TabPanel>
