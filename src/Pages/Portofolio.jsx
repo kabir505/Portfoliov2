@@ -10,7 +10,6 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CardProject from "../components/CardProject";
-import TechStackItem from "../components/TechStackIcon";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import WorkExperience from "../components/WorkExperience";
@@ -471,7 +470,14 @@ export default function FullWidthTabs() {
                       data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
                       data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
                     >
-                      <TechStackItem name={language} />
+                      <div className="group p-4 rounded-2xl bg-slate-800/50 hover:bg-slate-700/50 transition-all duration-300 ease-in-out flex items-center justify-center hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl min-h-[80px]">
+                        <div className="relative w-full">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-50 blur transition duration-300"></div>
+                          <span className="relative text-slate-300 font-semibold text-sm md:text-base tracking-wide group-hover:text-white transition-colors duration-300 text-center block">
+                            {language}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -489,7 +495,14 @@ export default function FullWidthTabs() {
                       data-aos={index % 3 === 0 ? "fade-up-right" : index % 3 === 1 ? "fade-up" : "fade-up-left"}
                       data-aos-duration={index % 3 === 0 ? "1000" : index % 3 === 1 ? "1200" : "1000"}
                     >
-                      <TechStackItem name={tech} />
+                      <div className="group p-4 rounded-2xl bg-slate-800/50 hover:bg-slate-700/50 transition-all duration-300 ease-in-out flex items-center justify-center hover:scale-105 cursor-pointer shadow-lg hover:shadow-xl min-h-[80px]">
+                        <div className="relative w-full">
+                          <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-0 group-hover:opacity-50 blur transition duration-300"></div>
+                          <span className="relative text-slate-300 font-semibold text-sm md:text-base tracking-wide group-hover:text-white transition-colors duration-300 text-center block">
+                            {tech}
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>
