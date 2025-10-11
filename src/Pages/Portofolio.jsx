@@ -115,15 +115,27 @@ const techStacks = [
   { icon: "SweetAlert.svg", language: "SweetAlert2" },
 ];
 
-export default function FullWidthTabs() {
-  const [value, setValue] = useState(0);
-  const [projects, setProjects] = useState([]);
-  const [workExperience, setWorkExperience] = useState([]);
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllWorkExperience, setShowAllWorkExperience] = useState(false);
-  const isMobile = window.innerWidth < 768;
-  const initialProjects = 8; // Always show 8 projects
-  const initialWorkExperience = 4; // Always show 4 work experiences
+// export default function FullWidthTabs() {
+//   const [value, setValue] = useState(0);
+//   const [projects, setProjects] = useState([]);
+//   const [workExperience, setWorkExperience] = useState([]);
+//   const [showAllProjects, setShowAllProjects] = useState(false);
+//   const [showAllWorkExperience, setShowAllWorkExperience] = useState(false);
+//   const isMobile = window.innerWidth < 768;
+//   const initialProjects = 8; // Always show 8 projects
+//   const initialWorkExperience = 4; // Always show 4 work experiences
+
+
+const techStackData = {
+  languages: [
+    "Python", "Java", "C++", "Scala", "HTML/CSS", "JavaScript", "MATLAB", "SQL"
+  ],
+  technologies: [
+    "Linux", "Unix", "Git", "GitHub", "Django", "Flask", "ReactJS", "Node.js", 
+    "WordPress", "Pandas", "Scikit-learn", "TensorFlow", "PyTorch", "MySQL/PostgreSQL", 
+    "AWS", "Docker", "ROS", "JIRA", "Trello", "Unit Testing (PyTest, JUnit)"
+  ]
+};
 
   useEffect(() => {
     AOS.init({
