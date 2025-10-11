@@ -1,45 +1,87 @@
-# Portfolio V5
+# Kabir Suri - Portfolio Website
 
-Hello everyone\! 👋
+<div align="center">
+  <img src="public/kabirsuriphoto.jpg" alt="Kabir Suri" width="200" style="border-radius: 50%; margin-bottom: 20px;">
+  
+  <h3>Software Engineer & Content Creator</h3>
+  <p>Building the future with code | 200K+ followers on CodingKabs</p>
+  
+  [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Portfolio-blue?style=for-the-badge&logo=vercel)](https://codingkabs.vercel.app)
+  [![GitHub](https://img.shields.io/badge/GitHub-View%20Source-black?style=for-the-badge&logo=github)](https://github.com/kabir505/Portfoliov2)
+  [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/kabir-suri)
+</div>
 
-Let me introduce myself, I'm **Eki Zulfar Rachman**. On this occasion, I'd like to share the portfolio website project that I've developed.
+---
 
-## 🚀 Live Demo
+## 🚀 About Me
 
-**Website Link:** [https://www.eki.my.id/](https://www.eki.my.id/)
+Hello! I'm **Kabir Suri**, a Computer Science student at King's College London passionate about building software that's efficient, impactful, and sustainable. My experience spans frontend and backend development, with hands-on roles at **TP ICAP** and **Condé Nast**, where I worked on automation tools, scalable cloud systems, and creative tech solutions.
+
+Alongside my degree, I founded **CodingKabs** - a digital platform where I share insights on software engineering, productivity, and tech lifestyle content to over **200,000 followers**. My goal is to bridge the gap between creativity and technology while driving innovation that balances performance and sustainability.
+
+## 🌟 Live Demo
+
+**🔗 Portfolio Website:** [https://codingkabs.vercel.app](https://codingkabs.vercel.app)
 
 ## 🛠️ Tech Stack
 
-This project is built using modern web technologies:
+This modern portfolio is built with cutting-edge technologies:
 
-  - **ReactJS** - Frontend framework
-  - **Tailwind CSS** - Utility-first CSS framework
-  - **Supabase** - Backend for portfolio data, certificates, and comment system
-  - **AOS** - Animate On Scroll library
-  - **Framer Motion** - Animation library
-  - **Lucide** - Icon library
-  - **Material UI** - React component library
-  - **SweetAlert2** - Beautiful alert dialogs
+### Frontend
+- **React 18** - Modern React with hooks and functional components
+- **Vite** - Lightning-fast build tool and development server
+- **Tailwind CSS** - Utility-first CSS framework for rapid UI development
+- **Framer Motion** - Production-ready motion library for React
+- **AOS (Animate On Scroll)** - Scroll animation library
+- **Material UI** - React component library for consistent design
+
+### Backend & Database
+- **Supabase** - Open source Firebase alternative for backend services
+- **PostgreSQL** - Robust relational database
+- **Real-time subscriptions** - Live comment system
+
+### Development Tools
+- **ESLint** - Code linting and quality assurance
+- **PostCSS** - CSS processing and optimization
+- **Vercel** - Deployment and hosting platform
+
+### Additional Libraries
+- **Lucide React** - Beautiful & consistent icon toolkit
+- **SweetAlert2** - Beautiful, responsive, customizable popup boxes
+- **Lottie** - Lightweight animations for web
+- **Typewriter Effect** - Typewriter animation library
+
+## 🎯 Key Features
+
+- ✨ **Modern Design** - Clean, responsive, and visually appealing interface
+- 🚀 **Performance Optimized** - Fast loading times and smooth animations
+- 📱 **Mobile Responsive** - Perfect experience across all devices
+- 🎨 **Interactive Elements** - Hover effects, animations, and transitions
+- 💬 **Comment System** - Real-time comments with Supabase integration
+- 🏢 **Work Experience** - Detailed showcase of professional experience
+- 💼 **Project Portfolio** - Comprehensive project gallery with live demos
+- 🛠️ **Tech Stack Display** - Organized skills and technologies
+- 📄 **CV Download** - Direct access to resume
+- 🌙 **Dark Theme** - Modern dark mode design
 
 ## 📋 Prerequisites
 
-Before running this project, ensure you have the following installed:
+Before running this project, ensure you have:
 
-  - **Node.js** (version 14.x or higher)
-  - **npm** or **yarn** package manager
+- **Node.js** (version 16.x or higher)
+- **npm** or **yarn** package manager
+- **Git** for version control
 
 ## 🏃‍♂️ Getting Started
 
-Follow these steps to run the project locally:
-
-### 1\. Clone the Repository
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/EkiZR/Portofolio_V5.git
-cd Portofolio_V5
+git clone https://github.com/kabir505/Portfoliov2.git
+cd Portfoliov2
 ```
 
-### 2\. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install
@@ -51,197 +93,172 @@ If you encounter peer dependency issues, use:
 npm install --legacy-peer-deps
 ```
 
-### 3\. Run the Development Server
+### 3. Environment Setup
+
+Create a `.env` file in the root directory:
+
+```env
+# Supabase Configuration
+VITE_SUPABASE_URL=your-supabase-project-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+```
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
 ```
 
-### 4\. Open in Browser
+### 5. Open in Browser
 
-Access the application through the link displayed in your terminal (usually `http://localhost:5173`).
+Access the application at `http://localhost:5173`
 
 ## 🏗️ Building for Production
 
-To create a production-ready build:
-
-1.  Run the build command:
-
-    ```bash
-    npm run build
-    ```
-
-2.  The build files will be saved in the `dist` folder. Upload this folder to your hosting server.
-
-## ⚙️ Configuration (Supabase)
-
-All backend data for this project (portfolio, certificates, and comments) is managed by Supabase.
-
-### 1\. Create Supabase Project
-
-  - Go to [Supabase](https://supabase.com/) and create a new project.
-  - Keep your **Project URL** and **anon public key** handy. You can find them in **Settings \> API**.
-
-### 2\. Setup Database Tables & Policies
-
-Run the following all-in-one SQL script in your Supabase **SQL Editor**. This will set up all necessary tables, security policies, storage, and also insert one example for each table.
-
-```sql
--- ---- TABLE CREATION ----
-
--- Creates the 'projects' table for portfolio items
-CREATE TABLE public.projects (
-  id bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  created_at timestamp with time zone DEFAULT now() NOT NULL,
-  "Title" text,
-  "Description" text,
-  "Img" text,
-  "Link" text,
-  "Github" text,
-  "Features" jsonb,
-  "TechStack" jsonb
-);
-
--- Creates the 'certificates' table
-CREATE TABLE public.certificates (
-  id bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-  created_at timestamp with time zone DEFAULT now() NOT NULL,
-  "Img" text
-);
-
--- Creates the 'portfolio_comments' table for the comment system
-CREATE TABLE public.portfolio_comments (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  content TEXT NOT NULL,
-  user_name VARCHAR(255) NOT NULL,
-  profile_image TEXT,
-  is_pinned BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- ---- ROW LEVEL SECURITY (RLS) SETUP ----
-
--- Enable RLS for all tables
-ALTER TABLE public.projects ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.certificates ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.portfolio_comments ENABLE ROW LEVEL SECURITY;
-
--- ---- POLICY CREATION ----
-
--- Policy for 'projects': Allow public read access
-CREATE POLICY "Public Read Access Policy for Projects"
-ON public.projects FOR SELECT TO public USING (true);
-
--- Policy for 'certificates': Allow public read access
-CREATE POLICY "Public Read Access Policy for Certificates"
-ON public.certificates FOR SELECT TO public USING (true);
-
--- Policies for 'portfolio_comments': Allow read for everyone, and insert for everyone (but not pinned)
-CREATE POLICY "Allow public read on portfolio_comments"
-ON public.portfolio_comments FOR SELECT TO public USING (true);
-
-CREATE POLICY "Allow public insert on portfolio_comments"
-ON public.portfolio_comments FOR INSERT TO public WITH CHECK (is_pinned = false);
-
--- ---- STORAGE SETUP FOR COMMENT PROFILE IMAGES ----
-
--- Create a public bucket for profile images
-INSERT INTO storage.buckets (id, name, public)
-VALUES ('profile-images', 'profile-images', true)
-ON CONFLICT (id) DO NOTHING; -- Avoid errors if the bucket already exists
-
--- Policies for 'profile-images' bucket
-CREATE POLICY "Allow public to upload profile images"
-ON storage.objects FOR INSERT TO public WITH CHECK (bucket_id = 'profile-images');
-
-CREATE POLICY "Allow public to read profile images"
-ON storage.objects FOR SELECT TO public USING (bucket_id = 'profile-images');
-
--- ---- EXAMPLE DATA INSERTION ----
-
--- Insert one example project
-INSERT INTO public.projects ("Title", "Description", "Img", "Link", "Github", "Features", "TechStack") 
-VALUES (
-    'Example Project Title', 
-    'A simple description for this example project, explaining its main purpose and goals.', 
-    'REPLACE_WITH_YOUR_PROJECT_IMAGE_URL.png', 
-    'REPLACE_WITH_YOUR_LIVE_DEMO_URL.com', 
-    'REPLACE_WITH_YOUR_GITHUB_REPO_URL.com', 
-    '["Main Feature A", "Core Function B", "Key Ability C"]', 
-    '["React", "Supabase", "Tailwind CSS"]'
-);
-
--- Insert one example certificate
-INSERT INTO public.certificates ("Img") 
-VALUES ('REPLACE_WITH_YOUR_CERTIFICATE_IMAGE_URL.png');
-
--- Insert one example comment
-INSERT INTO public.portfolio_comments (content, user_name) 
-VALUES ('Created By Eki Zulfar Rachman', 'ekizr');
-
+```bash
+npm run build
 ```
 
-### 3\. Enable Realtime (for Comment System)
+The build files will be generated in the `dist` folder, ready for deployment.
 
-  - Go to **Table Editor > portofolio_comments**.
-  - Enable Realtime for the `portfolio_comments`.
+## ⚙️ Supabase Configuration
 
-## 🔧 Environment Variables Setup
+This portfolio uses Supabase for backend services including project data, work experience, and comments.
 
-Create a file named `.env` in the root of your project and add your Supabase credentials.
+### Database Setup
 
-```env
-# Supabase Configuration
-VITE_SUPABASE_URL=your-supabase-url
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+Run the SQL script in `supabase-setup.sql` in your Supabase SQL Editor to set up:
+
+- **Projects table** - Portfolio projects with features and tech stack
+- **Work Experience table** - Professional experience and achievements
+- **Comments table** - Real-time comment system
+- **Security policies** - Row-level security for data protection
+
+### Required Tables
+
+1. **projects** - Stores portfolio project information
+2. **work_experience** - Stores professional work history
+3. **portfolio_comments** - Stores user comments with real-time updates
+
+## 🎨 Design Philosophy
+
+This portfolio embodies my design principles:
+
+- **Simplicity** - Clean, uncluttered interface that focuses on content
+- **Performance** - Optimized for speed and smooth user experience
+- **Accessibility** - Designed with all users in mind
+- **Responsiveness** - Seamless experience across all devices
+- **Modern Aesthetics** - Contemporary design trends and animations
+
+## 📊 Project Structure
+
 ```
-
-**Important:**
-
-  - All environment variables must be prefixed with `VITE_` for Vite to access them.
-  - Restart your development server after creating or modifying the `.env` file.
-  - **Never** commit your `.env` file to version control. Ensure it's listed in your `.gitignore` file.
-
-### Configuration File (`supabase.js`)
-
-Ensure your Supabase client configuration file (e.g., `src/supabase.js`) uses these environment variables.
-
-```javascript
-import { createClient } from '@supabase/supabase-js'
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
-const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
-
-if (!supabaseUrl || !supabaseKey) {
-  throw new Error("Supabase URL and Anon Key are required. Check your .env file.")
-}
-
-export const supabase = createClient(supabaseUrl, supabaseKey)
+src/
+├── components/          # Reusable React components
+│   ├── Background.jsx   # Animated background component
+│   ├── CardProject.jsx  # Project card component
+│   ├── Modal.jsx        # Modal dialog component
+│   ├── Navbar.jsx       # Navigation component
+│   └── ...
+├── Pages/              # Main page components
+│   ├── Home.jsx        # Landing page
+│   ├── About.jsx       # About section
+│   ├── Portofolio.jsx  # Portfolio showcase
+│   └── Contact.jsx     # Contact form
+├── assets/             # Static assets
+└── supabase.js         # Supabase client configuration
 ```
 
 ## 🚨 Troubleshooting
 
-If you encounter issues while running the project:
+### Common Issues
 
-  - Ensure Node.js is correctly installed.
-  - Verify you're in the correct project directory.
-  - Check that all dependencies are installed without errors.
-  - Make sure your Supabase configuration in the `.env` file is correct and the server has been restarted.
-  - Clear your browser cache and try again.
+1. **Dependencies not installing**
+   ```bash
+   npm install --legacy-peer-deps
+   ```
 
-## 📝 Usage & Credits
+2. **Supabase connection issues**
+   - Verify your `.env` file has correct credentials
+   - Ensure Supabase project is active
+   - Check database tables are created
 
-We would appreciate it if you decide to use this project. Please include proper credit when using it. Thank you\! 🙏
+3. **Build errors**
+   - Clear node_modules and reinstall
+   - Check for TypeScript errors
+   - Verify all imports are correct
 
-## 📞 Contact
+4. **Styling issues**
+   - Ensure Tailwind CSS is properly configured
+   - Check for conflicting CSS classes
 
-If you have any questions or need help with the setup, feel free to reach out\!
+## 🎯 Performance Optimizations
 
-**Eki Zulfar Rachman**
+- **Code Splitting** - Lazy loading of components
+- **Image Optimization** - Optimized images and lazy loading
+- **Bundle Analysis** - Minimized bundle size
+- **Caching** - Efficient data caching with Supabase
+- **Animations** - Hardware-accelerated CSS animations
 
-  - Website: [https://www.eki.my.id/](https://www.eki.my.id/)
-  - GitHub: [EkiZR](https://github.com/EkiZR)
+## 📱 Mobile Optimization
 
------
+- **Responsive Design** - Mobile-first approach
+- **Touch Interactions** - Optimized for touch devices
+- **Performance** - Reduced animations on mobile
+- **Navigation** - Mobile-friendly navigation menu
 
-⭐ If this project helped you, please consider giving it a star on GitHub\!
+## 🔒 Security Features
+
+- **Environment Variables** - Secure API key management
+- **Row Level Security** - Supabase RLS policies
+- **Input Validation** - Form validation and sanitization
+- **HTTPS** - Secure connections in production
+
+## 📈 Analytics & SEO
+
+- **Meta Tags** - Optimized for search engines
+- **Open Graph** - Social media sharing optimization
+- **Sitemap** - Search engine indexing
+- **Performance Monitoring** - Core Web Vitals tracking
+
+## 🤝 Contributing
+
+While this is a personal portfolio, I welcome feedback and suggestions:
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 📞 Contact & Connect
+
+<div align="center">
+
+**Kabir Suri**
+
+[![Website](https://img.shields.io/badge/Website-Portfolio-blue?style=flat-square&logo=vercel)](https://codingkabs.vercel.app)
+[![GitHub](https://img.shields.io/badge/GitHub-kabir505-black?style=flat-square&logo=github)](https://github.com/kabir505)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/kabir-suri)
+[![Instagram](https://img.shields.io/badge/Instagram-CodingKabs-pink?style=flat-square&logo=instagram)](https://instagram.com/codingkabs)
+[![Email](https://img.shields.io/badge/Email-Contact-red?style=flat-square&logo=gmail)](mailto:kabir@codingkabs.com)
+
+**📍 Location:** London, UK  
+**🎓 Education:** King's College London - Computer Science  
+**💼 Current:** Software Engineering Intern at TP ICAP  
+**📺 Content:** 200K+ followers on CodingKabs
+
+</div>
+
+---
+
+<div align="center">
+  <p><em>"The best way to predict the future is to create it"</em></p>
+  
+  ⭐ If you found this portfolio helpful, please consider giving it a star on GitHub!
+  
+  <p>Made with ❤️ by <strong>Kabir Suri</strong></p>
+</div>
