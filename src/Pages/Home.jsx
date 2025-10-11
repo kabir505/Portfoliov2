@@ -81,7 +81,7 @@ const PAUSE_DURATION = 2000;
 const WORDS = ["Software Engineer", "Content Creator"];
 const TECH_STACK = ["Software Engineer", "Web Development", "AI", "Content Creator"];
 const SOCIAL_LINKS = [
-  { icon: Github, link: "https://github.com/YourUsername" },
+  { icon: Github, link: "https://github.com/codingkabs" },
   { icon: Linkedin, link: "https://www.linkedin.com/in/kabir-suri-211b1b243/" },
   { icon: Instagram, link: "https://www.instagram.com/codingkabs" }
 ];
