@@ -6,7 +6,6 @@
   <h3>Software Engineer & Content Creator</h3>
   <p>Building the future with code | 200K+ followers on CodingKabs</p>
   
-  [![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Portfolio-blue?style=for-the-badge&logo=vercel)](https://codingkabs.vercel.app)
   [![GitHub](https://img.shields.io/badge/GitHub-View%20Source-black?style=for-the-badge&logo=github)](https://github.com/kabir505/Portfoliov2)
   [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/kabir-suri)
 </div>
@@ -19,9 +18,6 @@ Hello! I'm **Kabir Suri**, a Computer Science student at King's College London p
 
 Alongside my degree, I founded **CodingKabs** - a digital platform where I share insights on software engineering, productivity, and tech lifestyle content to over **200,000 followers**. My goal is to bridge the gap between creativity and technology while driving innovation that balances performance and sustainability.
 
-## 🌟 Live Demo
-
-**🔗 Portfolio Website:** [https://codingkabs.vercel.app](https://codingkabs.vercel.app)
 
 ## 🛠️ Tech Stack
 
@@ -69,7 +65,7 @@ This modern portfolio is built with cutting-edge technologies:
 Before running this project, ensure you have:
 
 - **Node.js** (version 16.x or higher)
-- **npm** or **yarn** package manager
+  - **npm** or **yarn** package manager
 - **Git** for version control
 
 ## 🏃‍♂️ Getting Started
@@ -115,9 +111,9 @@ Access the application at `http://localhost:5173`
 
 ## 🏗️ Building for Production
 
-```bash
-npm run build
-```
+    ```bash
+    npm run build
+    ```
 
 The build files will be generated in the `dist` folder, ready for deployment.
 
@@ -240,7 +236,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 **Kabir Suri**
 
-[![Website](https://img.shields.io/badge/Website-Portfolio-blue?style=flat-square&logo=vercel)](https://codingkabs.vercel.app)
+[![Website](https://img.shields.io/badge/Website-Portfolio-blue?style=flat-square&logo=vercel)](https://codingkabs.com)
 [![GitHub](https://img.shields.io/badge/GitHub-kabir505-black?style=flat-square&logo=github)](https://github.com/kabir505)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/kabir-suri)
 [![Instagram](https://img.shields.io/badge/Instagram-CodingKabs-pink?style=flat-square&logo=instagram)](https://instagram.com/codingkabs)
